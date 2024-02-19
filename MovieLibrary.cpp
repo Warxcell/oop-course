@@ -40,13 +40,16 @@ void MovieLibrary::printMoviesSummary(ostream &os) const {
 
 void
 MovieLibrary::printLatestAvailableMovieByDirectorAndType(ostream &os, const string &name, const MovieType &type) const {
-    auto found = find_if(this->movies.begin(), this->movies.end(),
+    auto found = find_if(this->movies.rbegin(), this->movies.rend(),
                          [&name, &type](auto &item) {
-                             return item.second.getDirector() == name && item.second.getType() == type;
+                             return item.second.isAvailable() && item.second.getDirector() == name &&
+                                    item.second.getType() == type;
                          });
 
-    if (found == this->movies.end()) {
+    if (found != this->movies.rend()) {
         os << found->second;
+    } else {
+        os << "Няма намерен!";
     }
 }
 
