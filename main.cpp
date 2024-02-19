@@ -86,10 +86,4 @@ int main() {
 
         cout << endl;
     } while (true);
-
-//    try {
-//        throw std::invalid_argument("test");
-//    } catch (invalid_argument &exception) {
-//        cout << exception.what() << endl;
-//    }
 }
