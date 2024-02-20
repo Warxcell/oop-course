@@ -40,17 +40,23 @@ void MovieLibrary::printMoviesSummary(ostream &os) const {
 
 void
 MovieLibrary::printLatestAvailableMovieByDirectorAndType(ostream &os, const string &name, const MovieType &type) const {
-    auto found = find_if(this->movies.rbegin(), this->movies.rend(),
-                         [&name, &type](auto &item) {
-                             return item.second.isAvailable() && item.second.getDirector() == name &&
-                                    item.second.getType() == type;
-                         });
-
-    if (found != this->movies.rend()) {
-        os << found->second;
-    } else {
-        os << "Няма намерен!";
+    std::vector<Movie> found;
+    for (const auto &movie: this->movies) {
+        if (movie.second.isAvailable() && movie.second.getDirector() == name && movie.second.getType() == type) {
+            found.push_back(movie.second);
+        }
     }
+
+    if (found.empty()) {
+        os << "Няма намерен!";
+        return;
+    }
+
+    std::ranges::sort(found, [](const Movie &a, const Movie &b) {
+        return a.getCreatedOnYear() > b.getCreatedOnYear();
+    });
+
+    os << found[0];
 }
 
 void MovieLibrary::printMovieByNumber(ostream &os, const int &number) const {
