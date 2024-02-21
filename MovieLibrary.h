@@ -34,6 +34,8 @@ public:
     void printMoviesSummary(ostream &os) const;
 
     void printAvailableMovies(ostream &os) const;
+
+    void printNotAvailableMovies(ostream &os) const;
 };
 
 

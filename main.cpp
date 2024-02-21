@@ -36,6 +36,7 @@ int main() {
         cout << "4) Отпечатай филм " << endl;
         cout << "5) Намери последният наличен филм по режисьор и вид на носителят " << endl;
         cout << "6) Налични филми" << endl;
+        cout << "7) Принтирай всички филми които не са налични" << endl;
 
         cin >> choice;
 
@@ -79,6 +80,9 @@ int main() {
                 break;
             case 6:
                 movieLibrary.printAvailableMovies(cout);
+                break;
+            case 7:
+                movieLibrary.printNotAvailableMovies(cout);
                 break;
             default:
                 cout << "Невалиден избор !!";

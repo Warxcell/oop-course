@@ -69,4 +69,12 @@ void MovieLibrary::printMovieByNumber(ostream &os, const int &number) const {
     }
 }
 
+void MovieLibrary::printNotAvailableMovies(ostream &os) const {
+    for (const auto &[key, value]: this->movies) {
+        if (!value.isAvailable()) {
+            os << value;
+        }
+    }
+}
+
 MovieLibrary::MovieLibrary() = default;
